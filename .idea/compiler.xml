@@ -4,6 +4,7 @@
     <excludeFromCompile>
       <directory url="file://$PROJECT_DIR$/user-service/src/main/resources/archetype-resources" includeSubdirectories="true" />
       <directory url="file://$PROJECT_DIR$/hm-api/src/main/resources/archetype-resources" includeSubdirectories="true" />
+      <directory url="file://$PROJECT_DIR$/item-service/src/main/resources/archetype-resources" includeSubdirectories="true" />
     </excludeFromCompile>
     <annotationProcessing>
       <profile default="true" name="Default" enabled="true" />
@@ -11,6 +12,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="item-service" />
         <module name="user-service" />
         <module name="hm-service" />
         <module name="trade-service" />
@@ -25,6 +27,7 @@
       <module name="hm-api" options="-parameters" />
       <module name="hm-common" options="-parameters" />
       <module name="hm-service" options="-parameters" />
+      <module name="item-service" options="-parameters" />
       <module name="trade-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
