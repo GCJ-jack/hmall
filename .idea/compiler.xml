@@ -10,9 +10,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="hm-service" />
-        <module name="hm-common" />
         <module name="user-service" />
+        <module name="hm-service" />
+        <module name="trade-service" />
+        <module name="hm-common" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel target="11" />
@@ -21,6 +22,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="hm-common" options="-parameters" />
       <module name="hm-service" options="-parameters" />
+      <module name="trade-service" options="-parameters" />
       <module name="user-service" options="-parameters" />
     </option>
   </component>
