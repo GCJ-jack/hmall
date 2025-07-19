@@ -1,4 +1,4 @@
-package com.heima;
+package com.heima.trade;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
