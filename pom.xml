@@ -18,6 +18,7 @@
         <module>trade-service</module>
         <module>hm-api</module>
         <module>item-service</module>
+        <module>cart-service</module>
     </modules>
 
     <parent>
