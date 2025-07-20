@@ -1,0 +1,50 @@
+11:46:21:265  INFO 72562 --- [main] com.hmall.cart.CartApplication           : Starting CartApplication using Java 11.0.27 on guochaojundeMacBook-Pro.local with PID 72562 (/Users/guochaojun/Desktop/0、2024最新SpringCloud微服务开发与实战/SpringCloud微服务—资料/day02-Docker/资料/hmall/cart-service/target/classes started by guochaojun in /Users/guochaojun/Desktop/0、2024最新SpringCloud微服务开发与实战/SpringCloud微服务—资料/day02-Docker/资料/hmall)
+11:46:21:268 DEBUG 72562 --- [main] com.hmall.cart.CartApplication           : Running with Spring Boot v2.7.12, Spring v5.3.27
+11:46:21:268  INFO 72562 --- [main] com.hmall.cart.CartApplication           : The following 1 profile is active: "local"
+11:46:22:106  INFO 72562 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
+11:46:22:113  INFO 72562 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+11:46:22:113  INFO 72562 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+11:46:22:181  INFO 72562 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+11:46:22:182  INFO 72562 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 873 ms
+11:46:22:220  WARN 72562 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'cartController' defined in file [/Users/guochaojun/Desktop/0、2024最新SpringCloud微服务开发与实战/SpringCloud微服务—资料/day02-Docker/资料/hmall/cart-service/target/classes/com/hmall/cart/controller/CartController.class]: Unsatisfied dependency expressed through constructor parameter 0; nested exception is org.springframework.beans.factory.NoSuchBeanDefinitionException: No qualifying bean of type 'com.hmall.cart.service.ICartService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+11:46:22:222  INFO 72562 --- [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+11:46:22:233  INFO 72562 --- [main] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+11:46:22:248 ERROR 72562 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 0 of constructor in com.hmall.cart.controller.CartController required a bean of type 'com.hmall.cart.service.ICartService' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'com.hmall.cart.service.ICartService' in your configuration.
+
+11:48:39:577  INFO 72996 --- [main] com.hmall.cart.CartApplication           : Starting CartApplication using Java 11.0.27 on guochaojundeMacBook-Pro.local with PID 72996 (/Users/guochaojun/Desktop/0、2024最新SpringCloud微服务开发与实战/SpringCloud微服务—资料/day02-Docker/资料/hmall/cart-service/target/classes started by guochaojun in /Users/guochaojun/Desktop/0、2024最新SpringCloud微服务开发与实战/SpringCloud微服务—资料/day02-Docker/资料/hmall)
+11:48:39:579 DEBUG 72996 --- [main] com.hmall.cart.CartApplication           : Running with Spring Boot v2.7.12, Spring v5.3.27
+11:48:39:580  INFO 72996 --- [main] com.hmall.cart.CartApplication           : The following 1 profile is active: "local"
+11:48:40:390  INFO 72996 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8082 (http)
+11:48:40:397  INFO 72996 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+11:48:40:397  INFO 72996 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.75]
+11:48:40:464  INFO 72996 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+11:48:40:465  INFO 72996 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 833 ms
+11:48:40:954  INFO 72996 --- [main] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [springfox.documentation.swagger2.web.Swagger2ControllerWebMvc#getDocumentation(String, HttpServletRequest)]
+11:48:41:013  INFO 72996 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8082 (http) with context path ''
+11:48:41:013  INFO 72996 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Documentation plugins bootstrapped
+11:48:41:019  INFO 72996 --- [main] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+11:48:41:035  INFO 72996 --- [main] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+11:48:41:105  INFO 72996 --- [main] com.hmall.cart.CartApplication           : Started CartApplication in 1.867 seconds (JVM running for 2.184)
+11:48:48:053  INFO 72996 --- [http-nio-8082-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+11:48:48:054  INFO 72996 --- [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+11:48:48:056  INFO 72996 --- [http-nio-8082-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+11:50:38:791  INFO 72996 --- [http-nio-8082-exec-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+11:50:39:204  INFO 72996 --- [http-nio-8082-exec-7] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+11:50:39:210 DEBUG 72996 --- [http-nio-8082-exec-7] c.h.cart.mapper.CartMapper.selectList    : ==>  Preparing: SELECT id,user_id,item_id,num,name,spec,price,image,create_time,update_time FROM cart WHERE (user_id = ?)
+11:50:39:230 DEBUG 72996 --- [http-nio-8082-exec-7] c.h.cart.mapper.CartMapper.selectList    : ==> Parameters: null
+11:50:39:266 DEBUG 72996 --- [http-nio-8082-exec-7] c.h.cart.mapper.CartMapper.selectList    : <==      Total: 0
