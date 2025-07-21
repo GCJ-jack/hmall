@@ -3,8 +3,9 @@ server:
 spring:
   cloud:
     nacos:
+      server-addr: 127.0.0.1:8848  # 本地Nacos地址
       discovery:
-        enabled: false
+        enabled: true
   application:
     name: item-service
   profiles:
