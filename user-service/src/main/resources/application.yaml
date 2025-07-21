@@ -10,14 +10,13 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: ${hm.db.pw}
-#  cloud:
-#    nacos:
-#      server-addr: 192.168.150.101 # nacos地址
 
   cloud:
     nacos:
       discovery:
-        enabled: false
+        server-addr: 127.0.0.1:8848
+        enabled: true
+
 mybatis-plus:
   configuration:
     default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler
