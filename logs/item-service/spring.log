@@ -146,3 +146,20 @@
 14:34:01:345 DEBUG 63558 --- [http-nio-8081-exec-1] c.h.i.mapper.ItemMapper.selectBatchIds   : ==>  Preparing: SELECT id,name,price,stock,image,category,brand,spec,sold,comment_count,isAD,status,create_time,update_time,creater,updater FROM item WHERE id IN ( ? )
 14:34:01:361 DEBUG 63558 --- [http-nio-8081-exec-1] c.h.i.mapper.ItemMapper.selectBatchIds   : ==> Parameters: 100000006163(Long)
 14:34:01:378 DEBUG 63558 --- [http-nio-8081-exec-1] c.h.i.mapper.ItemMapper.selectBatchIds   : <==      Total: 1
+16:18:30:857  WARN 63558 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=58s448ms).
+16:23:40:328  INFO 63558 --- [nacos-grpc-client-executor-1447] com.alibaba.nacos.common.remote.client   : [94b6e212-6f67-405c-902a-452fed037d77] Receive server push request, request = ClientDetectionRequest, requestId = 9
+16:23:40:329  INFO 63558 --- [nacos-grpc-client-executor-1447] com.alibaba.nacos.common.remote.client   : [94b6e212-6f67-405c-902a-452fed037d77] Ack server push request, request = ClientDetectionRequest, requestId = 9
+16:23:48:054  WARN 63558 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=5m17s199ms).
+16:56:32:157  WARN 63558 --- [Thread-4] c.a.nacos.common.notify.NotifyCenter     : [NotifyCenter] Start destroying Publisher
+16:56:32:157  WARN 63558 --- [Thread-7] c.a.n.common.http.HttpClientBeanHolder   : [HttpClientBeanHolder] Start destroying common HttpClient
+16:56:32:159  WARN 63558 --- [Thread-4] c.a.nacos.common.notify.NotifyCenter     : [NotifyCenter] Destruction of the end
+16:56:32:161  WARN 63558 --- [Thread-7] c.a.n.common.http.HttpClientBeanHolder   : [HttpClientBeanHolder] Destruction of the end
+16:56:33:214  INFO 63558 --- [SpringApplicationShutdownHook] c.a.c.n.registry.NacosServiceRegistry    : De-registering from Nacos Server now...
+16:56:33:219  INFO 63558 --- [SpringApplicationShutdownHook] c.a.c.n.registry.NacosServiceRegistry    : De-registration finished.
+16:56:33:536  INFO 63558 --- [SpringApplicationShutdownHook] com.alibaba.nacos.common.remote.client   : Shutdown rpc client, set status to shutdown
+16:56:33:536  INFO 63558 --- [SpringApplicationShutdownHook] com.alibaba.nacos.common.remote.client   : Shutdown client event executor java.util.concurrent.ScheduledThreadPoolExecutor@6b51423a[Running, pool size = 2, active threads = 2, queued tasks = 0, completed tasks = 0]
+16:56:33:536  INFO 63558 --- [SpringApplicationShutdownHook] com.alibaba.nacos.common.remote.client   : Close current connection 1753079632193_127.0.0.1_55878
+16:56:33:539  INFO 63558 --- [nacos-grpc-client-executor-1870] c.a.n.c.remote.client.grpc.GrpcClient    : [1753079632193_127.0.0.1_55878]Ignore complete event,isRunning:false,isAbandon=false
+16:56:33:543  INFO 63558 --- [SpringApplicationShutdownHook] c.a.n.c.remote.client.grpc.GrpcClient    : Shutdown grpc executor java.util.concurrent.ThreadPoolExecutor@f3840c3[Running, pool size = 5, active threads = 0, queued tasks = 0, completed tasks = 1871]
+16:56:33:555  INFO 63558 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+16:56:33:579  INFO 63558 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

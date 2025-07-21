@@ -19,6 +19,7 @@
         <module>hm-api</module>
         <module>item-service</module>
         <module>cart-service</module>
+        <module>pay-service</module>
     </modules>
 
     <parent>

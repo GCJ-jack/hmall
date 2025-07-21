@@ -33,42 +33,44 @@ import java.util.stream.Collectors;
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements IOrderService {
 
     private final ItemClient itemClient;
+
     private final IOrderDetailService detailService;
+
     private final CartClient cartClient;
 
     @Override
     @Transactional
-    public Long createOrder(OrderFormDTO orderFormDTO) {
-        // 1.订单数据
+    public Long createOrder(OrderFormDTO orderFormDTO){
+        //1.订单数据
         Order order = new Order();
-        // 1.1.查询商品
+        //1.1查询商品
         List<OrderDetailDTO> detailDTOS = orderFormDTO.getDetails();
-        // 1.2.获取商品id和数量的Map
+        //1.2获取商品id和数量的map
         Map<Long, Integer> itemNumMap = detailDTOS.stream()
                 .collect(Collectors.toMap(OrderDetailDTO::getItemId, OrderDetailDTO::getNum));
         Set<Long> itemIds = itemNumMap.keySet();
-        // 1.3.查询商品
+        //1.3查询数量
         List<ItemDTO> items = itemClient.queryItemByIds(itemIds);
-        if (items == null || items.size() < itemIds.size()) {
+        if(items == null || items.size() < itemIds.size()){
             throw new BadRequestException("商品不存在");
         }
-        // 1.4.基于商品价格、购买数量计算商品总价：totalFee
+        //1.4基于商品价格 购买数量计算商品总价:total fee
         int total = 0;
-        for (ItemDTO item : items) {
-            total += item.getPrice();  itemNumMap.get(item.getId());
+        for(ItemDTO item :items){
+            total += item.getPrice() * itemNumMap.get(item.getId());
         }
+
         order.setTotalFee(total);
-        // 1.5.其它属性
+        //1.5其他属性
         order.setPaymentType(orderFormDTO.getPaymentType());
         order.setUserId(UserContext.getUser());
         order.setStatus(1);
-        // 1.6.将Order写入数据库order表中
+
+        //1.6将order写入数据库order表中
         save(order);
-
-        // 2.保存订单详情
-        List<OrderDetail> details = buildDetails(order.getId(), items, itemNumMap);
+        //保存订单详情
+        List<OrderDetail> details = buildDetails(order.getId(),items,itemNumMap);
         detailService.saveBatch(details);
-
         // 3.扣减库存
         try {
             itemClient.deductStock(detailDTOS);
