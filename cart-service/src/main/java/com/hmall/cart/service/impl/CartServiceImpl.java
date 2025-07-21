@@ -5,6 +5,7 @@ import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.hmall.cart.client.ItemClient;
 import com.hmall.cart.domain.dto.CartFormDTO;
 import com.hmall.cart.domain.dto.ItemDTO;
 import com.hmall.cart.domain.po.Cart;
@@ -30,11 +31,15 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+
 @Service
 public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements ICartService {
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    private ItemClient itemClient;
 
     @Autowired
     DiscoveryClient discoveryClient;
@@ -83,25 +88,22 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
         Set<Long> itemIds = vos.stream().map(CartVO::getItemId).collect(Collectors.toSet());
 
         //查询服务
-        List<ServiceInstance> instances = discoveryClient.getInstances("item-service");
-        //负载均衡 挑选一个实例
-        ServiceInstance serviceInstance =  instances.get(RandomUtil.randomInt(instances.size()));
-        // 2.查询商品
-        // 2.1.利用RestTemplate发起http请求，得到http的响应
-        ResponseEntity<List<ItemDTO>> response = restTemplate.exchange(
-                serviceInstance.getUri() + "/items?ids={ids}",
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<List<ItemDTO>>() {},
-                CollUtil.join(itemIds,",")
-        );
+//        List<ServiceInstance> instances = discoveryClient.getInstances("item-service");
+//        //负载均衡 挑选一个实例
+//        ServiceInstance serviceInstance =  instances.get(RandomUtil.randomInt(instances.size()));
+//        // 2.查询商品
+//        // 2.1.利用RestTemplate发起http请求，得到http的响应
+//        ResponseEntity<List<ItemDTO>> response = restTemplate.exchange(
+//                serviceInstance.getUri() + "/items?ids={ids}",
+//                HttpMethod.GET,
+//                null,
+//                new ParameterizedTypeReference<List<ItemDTO>>() {},
+//                CollUtil.join(itemIds,",")
+//        );
+
+        List<ItemDTO> items = itemClient.queryItemByIds(itemIds);
 
         // 2.2.解析响应
-        if (!response.getStatusCode().is2xxSuccessful()) {
-            // 查询失败，直接结束
-            return;
-        }
-        List<ItemDTO> items = response.getBody();
         if (CollUtils.isEmpty(items)) {
             return;
         }
