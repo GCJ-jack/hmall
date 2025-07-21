@@ -3,6 +3,11 @@ server:
 spring:
   application:
     name: cart-service
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848  # 本地Nacos地址
+      discovery:
+        enabled: true
   profiles:
     active: dev
   datasource:

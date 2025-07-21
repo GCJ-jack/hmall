@@ -1,6 +1,7 @@
 package com.hmall.cart.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -16,6 +17,8 @@ import com.hmall.common.utils.BeanUtils;
 import com.hmall.common.utils.CollUtils;
 import com.hmall.common.utils.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -23,10 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.lang.reflect.ParameterizedType;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -35,6 +35,9 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
 
     @Autowired
     private RestTemplate restTemplate;
+
+    @Autowired
+    DiscoveryClient discoveryClient;
     @Override
     public void addItem2Cart(CartFormDTO cartFormDTO) {
         //1.查询用户的id，来获取购物车信息
@@ -78,17 +81,21 @@ public class CartServiceImpl extends ServiceImpl<CartMapper, Cart> implements IC
     private void handleCartItems(List<CartVO> vos) {
         // TODO 1.获取商品id
         Set<Long> itemIds = vos.stream().map(CartVO::getItemId).collect(Collectors.toSet());
+
+        //查询服务
+        List<ServiceInstance> instances = discoveryClient.getInstances("item-service");
+        //负载均衡 挑选一个实例
+        ServiceInstance serviceInstance =  instances.get(RandomUtil.randomInt(instances.size()));
         // 2.查询商品
-        // List<ItemDTO> items = itemService.queryItemByIds(itemIds);
         // 2.1.利用RestTemplate发起http请求，得到http的响应
         ResponseEntity<List<ItemDTO>> response = restTemplate.exchange(
-                "http://localhost:8081/items?ids={ids}",
+                serviceInstance.getUri() + "/items?ids={ids}",
                 HttpMethod.GET,
                 null,
-                new ParameterizedTypeReference<List<ItemDTO>>() {
-                },
-                Map.of("ids", CollUtil.join(itemIds, ","))
+                new ParameterizedTypeReference<List<ItemDTO>>() {},
+                CollUtil.join(itemIds,",")
         );
+
         // 2.2.解析响应
         if (!response.getStatusCode().is2xxSuccessful()) {
             // 查询失败，直接结束
